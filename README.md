@@ -32,3 +32,5 @@ make sync-plist WORKFLOW_DIR=/path/to/installed/workflow
 
 - [WaniKani for Alfred](https://github.com/aleksgorbenko/alfred-workflow-wanikani)
 - [2Do for Alfred](https://github.com/aleksgorbenko/alfred-workflow-2do)
+- [Discogs for Alfred](https://github.com/aleksgorbenko/alfred-workflow-discogs)
+- [Bandcamp for Alfred](https://github.com/aleksgorbenko/alfred-workflow-bandcamp)
