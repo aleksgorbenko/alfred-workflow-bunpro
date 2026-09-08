@@ -30,7 +30,9 @@ make sync-plist WORKFLOW_DIR=/path/to/installed/workflow
 
 ## My Other Workflows
 
+- [Netlify for Alfred](https://github.com/aleksgorbenko/alfred-workflow-netlify)
 - [WaniKani for Alfred](https://github.com/aleksgorbenko/alfred-workflow-wanikani)
 - [2Do for Alfred](https://github.com/aleksgorbenko/alfred-workflow-2do)
 - [Discogs for Alfred](https://github.com/aleksgorbenko/alfred-workflow-discogs)
 - [Bandcamp for Alfred](https://github.com/aleksgorbenko/alfred-workflow-bandcamp)
+- [config](https://github.com/aleksgorbenko/config) — index of all my workflows, plus macOS/iOS setup
