@@ -27,6 +27,7 @@ build: check
 	mkdir -p $(BUILD)/data $(BUILD)/src/bnapi $(BUILD)/icons "$(BUILD)/List Filter Images"
 	cp info.plist $(BUILD)/
 	cp icon.png $(BUILD)/
+	cp *.png $(BUILD)/
 	cp data/grammar.json $(BUILD)/data/
 	cp src/bnapi/*.py $(BUILD)/src/bnapi/
 	cp icons/*.png $(BUILD)/icons/
