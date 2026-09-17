@@ -871,7 +871,7 @@
 		<key>B7DE4702-1C83-4BFB-B5D5-3F99B8E4FEA1</key>
 		<dict>
 			<key>note</key>
-			<string>bpm — BunPro dashboard commands</string>
+			<string>bpm - BunPro dashboard commands</string>
 			<key>xpos</key>
 			<real>100.0</real>
 			<key>ypos</key>
