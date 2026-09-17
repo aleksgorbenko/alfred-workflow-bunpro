@@ -24,12 +24,12 @@ clean:
 
 build: check
 	rm -rf $(DIST)
-	mkdir -p $(BUILD)/data $(BUILD)/src/bnapi $(BUILD)/icons "$(BUILD)/List Filter Images"
+	mkdir -p $(BUILD)/data $(BUILD)/src/bunpro $(BUILD)/icons "$(BUILD)/List Filter Images"
 	cp info.plist $(BUILD)/
 	cp icon.png $(BUILD)/
 	cp *.png $(BUILD)/
 	cp data/grammar.json $(BUILD)/data/
-	cp src/bnapi/*.py $(BUILD)/src/bnapi/
+	cp src/bunpro/*.py $(BUILD)/src/bunpro/
 	cp icons/*.png $(BUILD)/icons/
 	cp icons/icon_summary.png icons/icon_stats.png icons/icon_levels.png \
 		icons/icon_forecast.png icons/icon_leeches.png "$(BUILD)/List Filter Images/"

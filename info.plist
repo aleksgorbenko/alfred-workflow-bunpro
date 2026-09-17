@@ -273,7 +273,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>bps</string>
+				<string>{var:BUNPRO_SEARCH_KEYWORD}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -351,7 +351,7 @@
 				<key>runningsubtext</key>
 				<string>Talking to BunPro…</string>
 				<key>script</key>
-				<string>python3 src/bnapi/summary.py</string>
+				<string>python3 src/bunpro/summary.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -400,7 +400,7 @@
 				<key>runningsubtext</key>
 				<string>Talking to BunPro…</string>
 				<key>script</key>
-				<string>python3 src/bnapi/stats.py</string>
+				<string>python3 src/bunpro/stats.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -433,7 +433,7 @@
 				<key>items</key>
 				<string>[{"title": "Summary", "arg": "summary", "subtitle": "Level, XP, due counts, streak", "imagefile": "icon_summary.png"}, {"title": "Stats", "arg": "stats", "subtitle": "SRS stage breakdown (grammar + vocab)", "imagefile": "icon_stats.png"}, {"title": "Levels", "arg": "levels", "subtitle": "JLPT progress (grammar + vocab per N-level)", "imagefile": "icon_levels.png"}, {"title": "Forecast", "subtitle": "Review forecast (grammar + vocab due per day)", "arg": "forecast", "imagefile": "icon_forecast.png"}, {"title": "Leeches", "subtitle": "Ghost-SRS items you keep missing", "arg": "leeches", "imagefile": "icon_leeches.png"}]</string>
 				<key>keyword</key>
-				<string>bpro</string>
+				<string>{var:BUNPRO_DASHBOARD_KEYWORD}</string>
 				<key>matchmode</key>
 				<integer>0</integer>
 				<key>runningsubtext</key>
@@ -602,7 +602,7 @@
 				<key>runningsubtext</key>
 				<string>Talking to BunPro…</string>
 				<key>script</key>
-				<string>python3 src/bnapi/levels.py</string>
+				<string>python3 src/bunpro/levels.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -668,7 +668,7 @@
 				<key>runningsubtext</key>
 				<string>Talking to BunPro…</string>
 				<key>script</key>
-				<string>python3 src/bnapi/forecast.py</string>
+				<string>python3 src/bunpro/forecast.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -734,7 +734,7 @@
 				<key>runningsubtext</key>
 				<string>Talking to BunPro…</string>
 				<key>script</key>
-				<string>python3 src/bnapi/leeches.py</string>
+				<string>python3 src/bunpro/leeches.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -887,6 +887,48 @@
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>bps</string>
+				<key>placeholder</key>
+				<string>bps</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword for searching BunPro grammar points.</string>
+			<key>label</key>
+			<string>Search keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>BUNPRO_SEARCH_KEYWORD</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>bp</string>
+				<key>placeholder</key>
+				<string>bp</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword for opening the BunPro dashboard menu.</string>
+			<key>label</key>
+			<string>Dashboard keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>BUNPRO_DASHBOARD_KEYWORD</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>

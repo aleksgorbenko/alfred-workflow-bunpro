@@ -6,7 +6,7 @@ Search BunPro grammar points and review your personal progress from Alfred.
 
 Search BunPro grammar points by kana, romaji, or English via the `bps` keyword.
 
-Use the `bpro` keyword to browse your dashboard summary, statistics, levels, forecast, and leeches.
+Use the `bp` keyword to browse your dashboard summary, statistics, levels, forecast, and leeches.
 
 ## Install
 
@@ -18,7 +18,7 @@ Use the `bpro` keyword to browse your dashboard summary, statistics, levels, for
 
 - Python 3.14, standard library only.
 - `data/grammar.json` contains the searchable grammar reference.
-- Runtime code is in `src/bnapi/`.
+- Runtime code is in `src/bunpro/`.
 
 ```sh
 make check   # lint, format check, and tests
