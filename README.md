@@ -4,9 +4,10 @@ Search BunPro grammar points and review your personal progress from Alfred.
 
 ## Usage
 
-Search BunPro grammar points by kana, romaji, or English via the `bps` keyword.
-
-Use the `bp` keyword to browse your dashboard summary, statistics, levels, forecast, and leeches.
+| Keyword | Function |
+| --- | --- |
+| `bps` | Search BunPro grammar points by kana, romaji, or English. |
+| `bp` | Browse your dashboard summary, statistics, levels, forecast, and leeches. |
 
 ## Install
 
