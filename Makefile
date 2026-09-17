@@ -2,7 +2,7 @@ DIST := dist
 NAME := BunPro.alfredworkflow
 BUILD := $(DIST)/.build
 
-.PHONY: test lint format format-check check clean build release sync-plist
+.PHONY: test lint format format-check check clean build release sync-plist link-live
 
 test:
 	python3 -m pytest
@@ -50,3 +50,14 @@ sync-plist:
 	@test -n "$(WORKFLOW_DIR)" || (echo "usage: make sync-plist WORKFLOW_DIR=/path/to/bundle" && exit 1)
 	cp "$(WORKFLOW_DIR)/info.plist" info.plist
 	@echo "synced info.plist from $(WORKFLOW_DIR)"
+
+link-live:
+	@test -n "$(WORKFLOW_DIR)" || (echo "usage: make link-live WORKFLOW_DIR=/path/to/bundle" && exit 1)
+	ln -sfn "$(CURDIR)/src" "$(WORKFLOW_DIR)/src"
+	ln -sfn "$(CURDIR)/icons" "$(WORKFLOW_DIR)/icons"
+	ln -sfn "$(CURDIR)/icon.png" "$(WORKFLOW_DIR)/icon.png"
+	for icon in *.png; do \
+		[ "$$icon" = "icon.png" ] || ln -sfn "$(CURDIR)/$$icon" "$(WORKFLOW_DIR)/$$icon"; \
+	done
+	ln -sfn "$(CURDIR)/Makefile" "$(WORKFLOW_DIR)/Makefile"
+	@echo "linked $(WORKFLOW_DIR) to this repo"
