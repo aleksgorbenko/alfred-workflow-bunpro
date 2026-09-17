@@ -1,28 +1,27 @@
-# alfred-workflow-bunpro
+# BunPro for Alfred
 
-Alfred Workflow to search [BunPro](https://bunpro.jp) grammar points.
+Search BunPro grammar points and review your personal progress from Alfred.
 
-## Commands
+## Usage
 
-### `bps <query>` - grammar point search
+Search BunPro grammar points by kana, romaji, or English via the `bps` keyword.
 
-Live search over BunPro grammar points. Type kana, romaji, or English. Selecting a row opens that grammar point's page on [https://bunpro.jp](https://bunpro.jp).
+Use the `bpro` keyword to browse your dashboard summary, statistics, levels, forecast, and leeches.
 
 ## Install
 
 1. Download the latest `BunPro.alfredworkflow` from [Releases](https://github.com/aleksgorbenko/alfred-workflow-bunpro/releases).
-2. Double-click it - Alfred will prompt to import.
-3. Requires [Alfred](https://www.alfredapp.com) with a Powerpack license.
+2. Double-click it and let Alfred import it.
+3. Requires [Alfred](https://www.alfredapp.com) with a Powerpack licence.
 
 ## Development
 
-`data/grammar.json` is a static export, generated from BunPro's public grammar list at [bunpro.jp/grammar_points](https://bunpro.jp/grammar_points).
+- Python 3.14, standard library only.
+- `data/grammar.json` contains the searchable grammar reference.
+- Runtime code is in `src/bnapi/`.
 
 ```sh
-make check   # lint + format check + tests
-make test
-make lint
-make format
+make check   # lint, format check, and tests
 make build   # package dist/BunPro.alfredworkflow
 make release VERSION=v1.0.0
 make sync-plist WORKFLOW_DIR=/path/to/installed/workflow
@@ -30,9 +29,10 @@ make sync-plist WORKFLOW_DIR=/path/to/installed/workflow
 
 ## My Other Workflows
 
-- [Netlify for Alfred](https://github.com/aleksgorbenko/alfred-workflow-netlify)
+- [Nihongo for Alfred](https://github.com/aleksgorbenko/alfred-workflow-nihongo)
 - [WaniKani for Alfred](https://github.com/aleksgorbenko/alfred-workflow-wanikani)
+- [Netlify for Alfred](https://github.com/aleksgorbenko/alfred-workflow-netlify)
 - [2Do for Alfred](https://github.com/aleksgorbenko/alfred-workflow-2do)
 - [Discogs for Alfred](https://github.com/aleksgorbenko/alfred-workflow-discogs)
 - [Bandcamp for Alfred](https://github.com/aleksgorbenko/alfred-workflow-bandcamp)
-- [config](https://github.com/aleksgorbenko/config) — index of all my workflows, plus macOS/iOS setup
+- [config](https://github.com/aleksgorbenko/config)

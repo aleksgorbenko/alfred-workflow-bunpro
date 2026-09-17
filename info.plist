@@ -433,7 +433,7 @@
 				<key>items</key>
 				<string>[{"title": "Summary", "arg": "summary", "subtitle": "Level, XP, due counts, streak", "imagefile": "icon_summary.png"}, {"title": "Stats", "arg": "stats", "subtitle": "SRS stage breakdown (grammar + vocab)", "imagefile": "icon_stats.png"}, {"title": "Levels", "arg": "levels", "subtitle": "JLPT progress (grammar + vocab per N-level)", "imagefile": "icon_levels.png"}, {"title": "Forecast", "subtitle": "Review forecast (grammar + vocab due per day)", "arg": "forecast", "imagefile": "icon_forecast.png"}, {"title": "Leeches", "subtitle": "Ghost-SRS items you keep missing", "arg": "leeches", "imagefile": "icon_leeches.png"}]</string>
 				<key>keyword</key>
-				<string>bp</string>
+				<string>bpro</string>
 				<key>matchmode</key>
 				<integer>0</integer>
 				<key>runningsubtext</key>
