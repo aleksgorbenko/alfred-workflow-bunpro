@@ -433,7 +433,7 @@
 				<key>items</key>
 				<string>[{"title": "Summary", "arg": "summary", "subtitle": "Level, XP, due counts, streak", "imagefile": "icon_summary.png"}, {"title": "Stats", "arg": "stats", "subtitle": "SRS stage breakdown (grammar + vocab)", "imagefile": "icon_stats.png"}, {"title": "Levels", "arg": "levels", "subtitle": "JLPT progress (grammar + vocab per N-level)", "imagefile": "icon_levels.png"}, {"title": "Forecast", "subtitle": "Review forecast (grammar + vocab due per day)", "arg": "forecast", "imagefile": "icon_forecast.png"}, {"title": "Leeches", "subtitle": "Ghost-SRS items you keep missing", "arg": "leeches", "imagefile": "icon_leeches.png"}]</string>
 				<key>keyword</key>
-				<string>{var:BUNPRO_DASHBOARD_KEYWORD}</string>
+				<string>{var:BUNPRO_MAIN_KEYWORD}</string>
 				<key>matchmode</key>
 				<integer>0</integer>
 				<key>runningsubtext</key>
@@ -757,7 +757,46 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># BunPro for Alfred
+
+Search BunPro grammar points and review your personal progress from Alfred.
+
+## Usage
+
+| Keyword | Function |
+| --- | --- |
+| `bps` | Search BunPro grammar points by kana, romaji, or English. |
+| `bp` | Browse your dashboard summary, statistics, levels, forecast, and leeches. |
+
+## Install
+
+1. Download the latest `BunPro.alfredworkflow` from [Releases](https://github.com/aleksgorbenko/alfred-workflow-bunpro/releases).
+2. Double-click it and let Alfred import it.
+3. Requires [Alfred](https://www.alfredapp.com) with a Powerpack licence.
+
+## Development
+
+- Python 3.14, standard library only.
+- `data/grammar.json` contains the searchable grammar reference.
+- Runtime code is in `src/bunpro/`.
+
+```sh
+make check   # lint, format check, and tests
+make build   # package dist/BunPro.alfredworkflow
+make release VERSION=v1.0.0
+make sync-plist WORKFLOW_DIR=/path/to/installed/workflow
+```
+
+## My Other Workflows
+
+- [Nihongo for Alfred](https://github.com/aleksgorbenko/alfred-workflow-nihongo)
+- [WaniKani for Alfred](https://github.com/aleksgorbenko/alfred-workflow-wanikani)
+- [Netlify for Alfred](https://github.com/aleksgorbenko/alfred-workflow-netlify)
+- [2Do for Alfred](https://github.com/aleksgorbenko/alfred-workflow-2do)
+- [Discogs for Alfred](https://github.com/aleksgorbenko/alfred-workflow-discogs)
+- [Bandcamp for Alfred](https://github.com/aleksgorbenko/alfred-workflow-bandcamp)
+- [config](https://github.com/aleksgorbenko/config)
+</string>
 	<key>uidata</key>
 	<dict>
 		<key>37AB0092-2409-4DB0-A53F-B53BC9CBFFCA</key>
@@ -927,7 +966,7 @@
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>BUNPRO_DASHBOARD_KEYWORD</string>
+			<string>BUNPRO_MAIN_KEYWORD</string>
 		</dict>
 		<dict>
 			<key>config</key>
