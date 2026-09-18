@@ -9,6 +9,14 @@ Search BunPro grammar points and review your personal progress from Alfred.
 | `bps` | Search BunPro grammar points by kana, romaji, or English. |
 | `bp` | Browse your dashboard summary, statistics, levels, forecast, and leeches. |
 
+![BunPro dashboard menu](images/about/main.png)
+
+![BunPro grammar search](images/about/search.png)
+
+Open the Summary view to see your current BunPro progress.
+
+![BunPro dashboard summary](images/about/summary.png)
+
 ## Install
 
 1. Download the latest `BunPro.alfredworkflow` from [Releases](https://github.com/aleksgorbenko/alfred-workflow-bunpro/releases).

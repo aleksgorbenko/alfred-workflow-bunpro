@@ -761,11 +761,19 @@
 
 Search BunPro grammar points via the `bps` keyword. Type kana, romaji, or English to filter.
 
+![BunPro grammar search](images/about/search.png)
+
 * &lt;kbd&gt;↩&lt;/kbd&gt; Open the selected grammar point on BunPro.
 
 Browse your BunPro dashboard via the `bp` keyword.
 
+![BunPro dashboard menu](images/about/main.png)
+
 * &lt;kbd&gt;↩&lt;/kbd&gt; Open the selected dashboard view.
+
+Open the Summary view to see your current BunPro progress.
+
+![BunPro dashboard summary](images/about/summary.png)
 
 Set the keywords and API token in the [Workflow's Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).</string>
 	<key>uidata</key>
