@@ -933,7 +933,7 @@ Set the keywords and API token in the [Workflow's Configuration](https://www.alf
 			<key>description</key>
 			<string>Keyword for opening the BunPro dashboard menu.</string>
 			<key>label</key>
-			<string>Dashboard keyword</string>
+			<string>BunPro keyword</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
