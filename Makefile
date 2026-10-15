@@ -55,6 +55,7 @@ sync-plist:
 link-live:
 	@test -n "$(WORKFLOW_DIR)" || (echo "usage: make link-live WORKFLOW_DIR=/path/to/bundle" && exit 1)
 	ln -sfn "$(CURDIR)/src" "$(WORKFLOW_DIR)/src"
+	ln -sfn "$(CURDIR)/data" "$(WORKFLOW_DIR)/data"
 	ln -sfn "$(CURDIR)/icons" "$(WORKFLOW_DIR)/icons"
 	ln -sfn "$(CURDIR)/images" "$(WORKFLOW_DIR)/images"
 	ln -sfn "$(CURDIR)/icon.png" "$(WORKFLOW_DIR)/icon.png"
