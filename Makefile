@@ -1,22 +1,46 @@
 DIST := dist
 NAME := BunPro.alfredworkflow
 BUILD := $(DIST)/.build
+RUN := uv run --no-sync
+JSON_FILES := $(shell git ls-files '*.json')
+export HOMEBREW_NO_AUTO_UPDATE := 1
 
-.PHONY: test lint format format-check check clean build release sync-plist link-live
+.PHONY: setup test lint lint-python lint-data lint-md lint-actions format format-check audit check ci clean build release sync-plist link-live
+
+setup:
+	brew bundle --quiet
+	uv sync --group dev
 
 test:
-	python3 -m pytest
+	$(RUN) pytest
 
-lint:
-	ruff check .
+lint: lint-python lint-data lint-md lint-actions
+
+lint-python:
+	$(RUN) ruff check .
+
+lint-data:
+	plutil -lint info.plist
+	$(if $(JSON_FILES),jq empty $(JSON_FILES))
+
+lint-md:
+	markdownlint-cli2 "**/*.md"
+
+lint-actions:
+	actionlint
 
 format:
-	ruff format .
+	$(RUN) ruff format .
 
 format-check:
-	ruff format --check .
+	$(RUN) ruff format --check .
+
+audit:
+	$(RUN) pip-audit --skip-editable
 
 check: lint format-check test
+
+ci: check audit
 
 clean:
 	find . -name '__pycache__' -not -path './.git/*' -exec rm -rf {} +
@@ -58,6 +82,10 @@ link-live:
 	ln -sfn "$(CURDIR)/data" "$(WORKFLOW_DIR)/data"
 	ln -sfn "$(CURDIR)/icons" "$(WORKFLOW_DIR)/icons"
 	ln -sfn "$(CURDIR)/images" "$(WORKFLOW_DIR)/images"
+	mkdir -p "$(WORKFLOW_DIR)/List Filter Images"
+	for png in icon_summary icon_stats icon_levels icon_forecast icon_leeches; do \
+		ln -sfn "$(CURDIR)/icons/$$png.png" "$(WORKFLOW_DIR)/List Filter Images/$$png.png"; \
+	done
 	ln -sfn "$(CURDIR)/icon.png" "$(WORKFLOW_DIR)/icon.png"
 	for icon in *.png; do \
 		[ "$$icon" = "icon.png" ] || ln -sfn "$(CURDIR)/$$icon" "$(WORKFLOW_DIR)/$$icon"; \
