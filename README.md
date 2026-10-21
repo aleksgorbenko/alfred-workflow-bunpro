@@ -37,6 +37,10 @@ Open the Summary view to see your current BunPro progress.
 
 ![BunPro dashboard summary](images/about/summary.png)
 
+### Maintenance
+
+- `:bp` - cache size (Enter reveals the folder) and Empty Cache.
+
 ## Install
 
 1. Download the latest `BunPro.alfredworkflow` from [Releases](https://github.com/aleksgorbenko/alfred-workflow-bunpro/releases).

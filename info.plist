@@ -147,6 +147,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>74DF1F78-742C-4E49-84EE-A6227D5B56A8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03296B7C-431A-40EE-8E49-63AAD4A6E7F2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7B2C3D4E-5F60-4172-9B3C-000000000004</key>
 		<array>
 			<dict>
@@ -178,6 +191,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>72EF1E77-0503-4BA7-9E6A-53ECB4ECB137</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>963A6F17-CBE9-403E-B82A-E311D21B8AD2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>74DF1F78-742C-4E49-84EE-A6227D5B56A8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -755,6 +781,101 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>:{var:BUNPRO_MAIN_KEYWORD}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading…</string>
+				<key>script</key>
+				<string>exec /bin/bash src/maintenance.sh --menu "BunPro API responses"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Cache size, empty cache</string>
+				<key>title</key>
+				<string>BunPro Search Maintenance</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>963A6F17-CBE9-403E-B82A-E311D21B8AD2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>exec /bin/bash src/maintenance.sh "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>74DF1F78-742C-4E49-84EE-A6227D5B56A8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>03296B7C-431A-40EE-8E49-63AAD4A6E7F2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -775,9 +896,21 @@ Open the Summary view to see your current BunPro progress.
 
 ![BunPro dashboard summary](images/about/summary.png)
 
-Set the keywords and API token in the [Workflow's Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).</string>
+Set the keywords and API token in the [Workflow's Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+
+## Maintenance
+
+* `:bp` - cache size (Enter reveals the folder) and Empty Cache.
+</string>
 	<key>uidata</key>
 	<dict>
+		<key>03296B7C-431A-40EE-8E49-63AAD4A6E7F2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
+			<key>ypos</key>
+			<integer>790</integer>
+		</dict>
 		<key>37AB0092-2409-4DB0-A53F-B53BC9CBFFCA</key>
 		<dict>
 			<key>note</key>
@@ -841,6 +974,13 @@ Set the keywords and API token in the [Workflow's Configuration](https://www.alf
 			<key>ypos</key>
 			<real>480.0</real>
 		</dict>
+		<key>74DF1F78-742C-4E49-84EE-A6227D5B56A8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>790</integer>
+		</dict>
 		<key>7B2C3D4E-5F60-4172-9B3C-000000000004</key>
 		<dict>
 			<key>note</key>
@@ -867,6 +1007,15 @@ Set the keywords and API token in the [Workflow's Configuration](https://www.alf
 			<real>460.0</real>
 			<key>ypos</key>
 			<real>480.0</real>
+		</dict>
+		<key>963A6F17-CBE9-403E-B82A-E311D21B8AD2</key>
+		<dict>
+			<key>note</key>
+			<string>Maintenance: cache size, empty cache</string>
+			<key>xpos</key>
+			<integer>30</integer>
+			<key>ypos</key>
+			<integer>790</integer>
 		</dict>
 		<key>9B1023FD-1DFF-4869-9A67-77069D7FDA22</key>
 		<dict>
