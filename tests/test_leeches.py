@@ -1,13 +1,14 @@
 import datetime as dt
+from typing import Any
 
 from leeches import build_items
 
 NOW = dt.datetime(2026, 9, 1, 12, 0, tzinfo=dt.UTC)
 
 
-def _reviews(entries: list[dict]) -> dict:
-    data = []
-    included = []
+def _reviews(entries: list[dict[str, Any]]) -> dict[str, Any]:
+    data: list[dict[str, Any]] = []
+    included: list[dict[str, Any]] = []
     for entry in entries:
         data.append(
             {
@@ -39,7 +40,7 @@ def _reviews(entries: list[dict]) -> dict:
     return {"data": data, "included": included}
 
 
-def test_shows_active_leech_with_streak_and_next_review():
+def test_shows_active_leech_with_streak_and_next_review() -> None:
     reviews = _reviews(
         [
             {
@@ -60,7 +61,7 @@ def test_shows_active_leech_with_streak_and_next_review():
     assert items[0]["subtitle"] == "streak 1 · next review in 1h"
 
 
-def test_filters_out_slain_reviews():
+def test_filters_out_slain_reviews() -> None:
     reviews = _reviews(
         [
             {
@@ -81,12 +82,12 @@ def test_filters_out_slain_reviews():
     assert items[0]["valid"] is False
 
 
-def test_no_leeches_when_empty():
+def test_no_leeches_when_empty() -> None:
     items = build_items({"data": [], "included": []}, NOW)
     assert items[0]["title"] == "🎉 No leeches - clean SRS!"
 
 
-def test_sorts_by_streak_ascending():
+def test_sorts_by_streak_ascending() -> None:
     reviews = _reviews(
         [
             {

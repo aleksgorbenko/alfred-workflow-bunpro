@@ -2,6 +2,7 @@
 
 import os
 import sys
+from typing import Any
 
 from alfred_items import bold, emit, error_item, item
 from bunpro_api import BunproError, get_jlpt_progress
@@ -11,7 +12,7 @@ ICON = "icons/icon_levels.png"
 MASTERED_STAGES = ("expert", "master")
 
 
-def _progress(level_stats: dict) -> tuple[int, int, int]:
+def _progress(level_stats: dict[str, Any]) -> tuple[int, int, int]:
     stages = ("beginner", "adept", "seasoned", "expert", "master")
     started = sum(level_stats.get(stage, 0) for stage in stages)
     mastered = sum(level_stats.get(stage, 0) for stage in MASTERED_STAGES)
@@ -19,11 +20,11 @@ def _progress(level_stats: dict) -> tuple[int, int, int]:
     return started, mastered, total
 
 
-def build_items(progress: dict) -> list[dict]:
+def build_items(progress: dict[str, Any]) -> list[dict[str, Any]]:
     grammar = progress.get("grammar", {})
     vocab = progress.get("vocab", {})
 
-    items = []
+    items: list[dict[str, Any]] = []
     for level in ("5", "4", "3", "2", "1"):
         g_started, g_mastered, g_total = _progress(grammar.get(level, {}))
         v_started, v_mastered, v_total = _progress(vocab.get(level, {}))

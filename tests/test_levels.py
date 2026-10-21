@@ -1,8 +1,10 @@
+from typing import Any
+
 from levels import build_items
 
 
-def test_shows_started_and_mastered_per_jlpt_level():
-    progress = {
+def test_shows_started_and_mastered_per_jlpt_level() -> None:
+    progress: dict[str, Any] = {
         "grammar": {
             "5": {
                 "beginner": 25,
@@ -34,8 +36,8 @@ def test_shows_started_and_mastered_per_jlpt_level():
     )
 
 
-def test_orders_n5_through_n1():
-    progress = {"grammar": {}, "vocab": {}}
+def test_orders_n5_through_n1() -> None:
+    progress: dict[str, Any] = {"grammar": {}, "vocab": {}}
     items = build_items(progress)
     assert [item["title"].split(" - ")[0] for item in items] == [
         "𝐍𝟓",
@@ -46,7 +48,7 @@ def test_orders_n5_through_n1():
     ]
 
 
-def test_missing_level_defaults_to_zero():
+def test_missing_level_defaults_to_zero() -> None:
     items = build_items({"grammar": {}, "vocab": {}})
     assert items[0]["title"] == "𝐍𝟓"
     assert items[0]["subtitle"] == "Grammar 0/0 (mastered 0) · Vocab 0/0 (mastered 0)"

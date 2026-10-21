@@ -2,6 +2,7 @@
 
 import os
 import sys
+from typing import Any
 
 from alfred_items import emit, error_item, item
 from bunpro_api import BunproError, get_srs_level_overview
@@ -17,7 +18,7 @@ STAGES = [
 ]
 
 
-def build_items(overview: dict) -> list[dict]:
+def build_items(overview: dict[str, Any]) -> list[dict[str, Any]]:
     grammar = overview.get("grammar", {})
     vocab = overview.get("vocab", {})
 

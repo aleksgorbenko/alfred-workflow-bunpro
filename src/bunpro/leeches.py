@@ -3,6 +3,7 @@
 import datetime as dt
 import os
 import sys
+from typing import Any
 
 from alfred_items import emit, error_item, item
 from bunpro_api import BunproError, get_ghost_leeches
@@ -15,7 +16,7 @@ ONE_DAY_SECONDS = 86400
 
 
 def _parse(timestamp: str) -> dt.datetime:
-    return dt.datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+    return dt.datetime.fromisoformat(timestamp)
 
 
 def _next_review_subtitle(next_review: str, now: dt.datetime) -> str:
@@ -29,19 +30,19 @@ def _next_review_subtitle(next_review: str, now: dt.datetime) -> str:
     return f"next review in {int(delta // ONE_DAY_SECONDS)}d"
 
 
-def select_leeches(reviews: list[dict]) -> list[dict]:
+def select_leeches(reviews: list[dict[str, Any]]) -> list[dict[str, Any]]:
     active = [r for r in reviews if not r["attributes"]["is_slain"]]
     return sorted(active, key=lambda r: r["attributes"]["streak"])[:MAX_RESULTS]
 
 
-def build_items(reviews: dict, now: dt.datetime) -> list[dict]:
+def build_items(reviews: dict[str, Any], now: dt.datetime) -> list[dict[str, Any]]:
     included_by_key = {(i["type"], i["id"]): i for i in reviews.get("included", [])}
     leeches = select_leeches(reviews.get("data", []))
 
     if not leeches:
         return [item(title="🎉 No leeches - clean SRS!", valid=False)]
 
-    items = []
+    items: list[dict[str, Any]] = []
     for review in leeches:
         attrs = review["attributes"]
         reviewable_ref = review["relationships"]["reviewable"]["data"]

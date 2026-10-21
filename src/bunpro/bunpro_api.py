@@ -11,6 +11,7 @@ import json
 import urllib.error
 import urllib.parse
 import urllib.request
+from typing import Any
 
 from cache import cached
 
@@ -30,10 +31,10 @@ class BunproAuthError(BunproError):
     """Raised when the API token is missing or rejected (401)."""
 
 
-def _get(path: str, token: str) -> dict:
+def _get(path: str, token: str) -> dict[str, Any]:
     params = {"dangerously_authenticate_using_api_token": "true"}
     url = f"{API_BASE}{path}?{urllib.parse.urlencode(params)}"
-    request = urllib.request.Request(
+    request = urllib.request.Request(  # noqa: S310
         url,
         headers={
             "Authorization": f"Bearer {token}",
@@ -42,29 +43,32 @@ def _get(path: str, token: str) -> dict:
         },
     )
     try:
-        with urllib.request.urlopen(request, timeout=10) as response:
+        with urllib.request.urlopen(request, timeout=10) as response:  # noqa: S310
             return json.load(response)
     except urllib.error.HTTPError as error:
         if error.code == http.HTTPStatus.UNAUTHORIZED:
-            raise BunproAuthError("Invalid or missing BunPro API token") from error
-        raise BunproError(f"BunPro API returned HTTP {error.code}") from error
+            msg = "Invalid or missing BunPro API token"
+            raise BunproAuthError(msg) from error
+        msg = f"BunPro API returned HTTP {error.code}"
+        raise BunproError(msg) from error
     except urllib.error.URLError as error:
-        raise BunproError(f"Could not reach BunPro API: {error.reason}") from error
+        msg = f"Could not reach BunPro API: {error.reason}"
+        raise BunproError(msg) from error
 
 
-def get_user(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_user(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user and return the flattened user attributes."""
     return cached(f"{API_BASE}/user", ttl_seconds, lambda: _get("/user", token))[
         "user"
     ]["data"]["attributes"]
 
 
-def get_due(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_due(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user/due: {total_due_grammar, total_due_vocab}."""
     return cached(f"{API_BASE}/user/due", ttl_seconds, lambda: _get("/user/due", token))
 
 
-def get_base_stats(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_base_stats(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user_stats/base_stats and return the `facts` object."""
     return cached(
         f"{API_BASE}/user_stats/base_stats",
@@ -73,7 +77,7 @@ def get_base_stats(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
     )["facts"]
 
 
-def get_srs_level_overview(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_srs_level_overview(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user_stats/srs_level_overview: {grammar: {...}, vocab: {...}}."""
     return cached(
         f"{API_BASE}/user_stats/srs_level_overview",
@@ -82,7 +86,7 @@ def get_srs_level_overview(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
     )
 
 
-def get_jlpt_progress(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_jlpt_progress(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user_stats/jlpt_progress_mixed: {grammar: {...}, vocab: {...}}."""
     return cached(
         f"{API_BASE}/user_stats/jlpt_progress_mixed",
@@ -91,7 +95,7 @@ def get_jlpt_progress(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
     )
 
 
-def get_forecast_daily(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_forecast_daily(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user_stats/forecast_daily: {grammar: {...}, vocab: {...}}."""
     return cached(
         f"{API_BASE}/user_stats/forecast_daily",
@@ -100,7 +104,7 @@ def get_forecast_daily(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
     )
 
 
-def get_ghost_leeches(token: str, ttl_seconds: int = ONE_HOUR) -> dict:
+def get_ghost_leeches(token: str, ttl_seconds: int = ONE_HOUR) -> dict[str, Any]:
     """Fetch GET /user_stats/srs_ghost_level_details and return `reviews`."""
     return cached(
         f"{API_BASE}/user_stats/srs_ghost_level_details",

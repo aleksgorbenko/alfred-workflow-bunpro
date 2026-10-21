@@ -3,6 +3,7 @@
 import datetime as dt
 import os
 import sys
+from typing import Any
 
 from alfred_items import emit, error_item, item
 from bunpro_api import BunproError, get_forecast_daily
@@ -16,15 +17,15 @@ LABELS = {"later": "Later today", "tomorrow": "Tomorrow"}
 def _label(key: str) -> str:
     if key in LABELS:
         return LABELS[key]
-    date = dt.datetime.strptime(key, "%Y-%m-%d").date()
+    date = dt.date.fromisoformat(key)
     return date.strftime("%a %d/%m")
 
 
-def build_items(daily: dict) -> list[dict]:
+def build_items(daily: dict[str, Any]) -> list[dict[str, Any]]:
     grammar = daily.get("grammar", {})
     vocab = daily.get("vocab", {})
 
-    items = []
+    items: list[dict[str, Any]] = []
     for key in grammar:
         g_due = grammar.get(key, 0)
         v_due = vocab.get(key, 0)

@@ -2,6 +2,7 @@
 
 import os
 import sys
+from typing import Any
 
 from alfred_items import emit, error_item, item
 from bunpro_api import BunproError, get_base_stats, get_due, get_user
@@ -13,7 +14,9 @@ ICON_VOCAB_DUE = "icons/icon_summary_vocab_due.png"
 ICON_STREAK = "icons/icon_summary_streak.png"
 
 
-def build_items(user: dict, due: dict, base_stats: dict) -> list[dict]:
+def build_items(
+    user: dict[str, Any], due: dict[str, Any], base_stats: dict[str, Any]
+) -> list[dict[str, Any]]:
     level = user.get("level")
     xp = user.get("xp")
     next_level_xp = user.get("next_level_xp")

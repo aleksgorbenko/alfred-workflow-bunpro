@@ -1,7 +1,7 @@
 from summary import build_items
 
 
-def test_shows_level_xp_due_and_streak():
+def test_shows_level_xp_due_and_streak() -> None:
     user = {"level": 41, "xp": 94760, "next_level_xp": 98900}
     due = {"total_due_grammar": 37, "total_due_vocab": 0}
     base_stats = {"streak": 7, "days_studied": 43}

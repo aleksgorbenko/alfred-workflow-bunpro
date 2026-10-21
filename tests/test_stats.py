@@ -1,7 +1,7 @@
 from stats import build_items
 
 
-def test_sums_grammar_and_vocab_per_stage():
+def test_sums_grammar_and_vocab_per_stage() -> None:
     overview = {
         "grammar": {
             "beginner": 29,
@@ -28,6 +28,6 @@ def test_sums_grammar_and_vocab_per_stage():
     assert items[4]["title"] == "Master: 603"
 
 
-def test_missing_stage_keys_default_to_zero():
+def test_missing_stage_keys_default_to_zero() -> None:
     items = build_items({"grammar": {}, "vocab": {}})
     assert all(item["title"].endswith(": 0") for item in items)

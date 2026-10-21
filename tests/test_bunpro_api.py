@@ -1,5 +1,7 @@
 import urllib.error
-from unittest.mock import patch
+from email.message import Message
+from typing import Any
+from unittest.mock import MagicMock, patch
 
 import pytest
 from bunpro_api import (
@@ -15,8 +17,10 @@ from bunpro_api import (
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_user_returns_flattened_attributes(mock_urlopen):
-    payload = {"user": {"data": {"attributes": {"level": 41, "xp": 94760}}}}
+def test_get_user_returns_flattened_attributes(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {
+        "user": {"data": {"attributes": {"level": 41, "xp": 94760}}}
+    }
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_user("token")
     assert result == {"level": 41, "xp": 94760}
@@ -24,8 +28,8 @@ def test_get_user_returns_flattened_attributes(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_user_sends_auth_header_and_dangerous_flag(mock_urlopen):
-    payload = {"user": {"data": {"attributes": {}}}}
+def test_get_user_sends_auth_header_and_dangerous_flag(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"user": {"data": {"attributes": {}}}}
     with patch("bunpro_api.json.load", return_value=payload):
         get_user("secret-token")
 
@@ -35,8 +39,8 @@ def test_get_user_sends_auth_header_and_dangerous_flag(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_due_returns_body_as_is(mock_urlopen):
-    payload = {"total_due_grammar": 37, "total_due_vocab": 0}
+def test_get_due_returns_body_as_is(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"total_due_grammar": 37, "total_due_vocab": 0}
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_due("token")
     assert result == payload
@@ -44,8 +48,8 @@ def test_get_due_returns_body_as_is(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_base_stats_returns_facts_object(mock_urlopen):
-    payload = {"facts": {"streak": 7}, "badges": {"data": []}}
+def test_get_base_stats_returns_facts_object(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"facts": {"streak": 7}, "badges": {"data": []}}
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_base_stats("token")
     assert result == {"streak": 7}
@@ -53,8 +57,8 @@ def test_get_base_stats_returns_facts_object(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_srs_level_overview_returns_body_as_is(mock_urlopen):
-    payload = {"grammar": {}, "vocab": {}}
+def test_get_srs_level_overview_returns_body_as_is(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"grammar": {}, "vocab": {}}
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_srs_level_overview("token")
     assert result == payload
@@ -62,8 +66,8 @@ def test_get_srs_level_overview_returns_body_as_is(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_jlpt_progress_returns_body_as_is(mock_urlopen):
-    payload = {"grammar": {}, "vocab": {}}
+def test_get_jlpt_progress_returns_body_as_is(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"grammar": {}, "vocab": {}}
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_jlpt_progress("token")
     assert result == payload
@@ -71,8 +75,8 @@ def test_get_jlpt_progress_returns_body_as_is(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_forecast_daily_returns_body_as_is(mock_urlopen):
-    payload = {"grammar": {"later": 16}, "vocab": {"later": 0}}
+def test_get_forecast_daily_returns_body_as_is(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"grammar": {"later": 16}, "vocab": {"later": 0}}
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_forecast_daily("token")
     assert result == payload
@@ -80,8 +84,8 @@ def test_get_forecast_daily_returns_body_as_is(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_get_ghost_leeches_returns_reviews_object(mock_urlopen):
-    payload = {"type": "ghost", "reviews": {"data": [], "included": []}}
+def test_get_ghost_leeches_returns_reviews_object(mock_urlopen: MagicMock) -> None:
+    payload: dict[str, Any] = {"type": "ghost", "reviews": {"data": [], "included": []}}
     with patch("bunpro_api.json.load", return_value=payload):
         result = get_ghost_leeches("token")
     assert result == {"data": [], "included": []}
@@ -89,9 +93,11 @@ def test_get_ghost_leeches_returns_reviews_object(mock_urlopen):
 
 
 @patch("bunpro_api.urllib.request.urlopen")
-def test_raises_auth_error_on_401(mock_urlopen):
-    mock_urlopen.side_effect = urllib.error.HTTPError(
-        url="", code=401, msg="Unauthorized", hdrs=None, fp=None
+def test_raises_auth_error_on_401(mock_urlopen: MagicMock) -> None:
+    error = urllib.error.HTTPError(
+        url="", code=401, msg="Unauthorized", hdrs=Message(), fp=None
     )
+    mock_urlopen.side_effect = error
     with pytest.raises(BunproAuthError):
         get_user("bad-token")
+    error.close()
