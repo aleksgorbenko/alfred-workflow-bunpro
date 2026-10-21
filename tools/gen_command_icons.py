@@ -78,15 +78,19 @@ def main() -> int:
     wanted = sys.argv[1:] or list(ICONS)
     for key in wanted:
         if key not in ICONS:
+            sys.stderr.write(f"unknown key: {key}\n")
             return 1
         path = out_dir / f"icon_{key}.png"
         render(ICONS[key], path)
+        sys.stdout.write(f"{path}\n")
     for key, (emoji, bg) in STAGE_ICONS.items():
         path = out_dir / f"icon_stage_{key}.png"
         render(emoji, path, bg=bg)
+        sys.stdout.write(f"{path}\n")
     for key, emoji in SUMMARY_ICONS.items():
         path = out_dir / f"icon_summary_{key}.png"
         render(emoji, path)
+        sys.stdout.write(f"{path}\n")
     return 0
 
 
