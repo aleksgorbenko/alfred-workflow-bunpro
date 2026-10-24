@@ -56,7 +56,7 @@ clean:
 
 build: check
 	rm -rf $(DIST)
-	mkdir -p $(BUILD)/data $(BUILD)/src/bunpro $(BUILD)/icons "$(BUILD)/List Filter Images" "$(BUILD)/images/about"
+	mkdir -p $(BUILD)/data $(BUILD)/src/bunpro $(BUILD)/icons "$(BUILD)/images/about"
 	cp info.plist $(BUILD)/
 	cp icon.png $(BUILD)/
 	cp *.png $(BUILD)/
@@ -64,8 +64,6 @@ build: check
 	cp src/bunpro/*.py $(BUILD)/src/bunpro/
 	cp images/about/*.png "$(BUILD)/images/about/"
 	cp icons/*.png $(BUILD)/icons/
-	cp icons/icon_summary.png icons/icon_stats.png icons/icon_levels.png \
-		icons/icon_forecast.png icons/icon_leeches.png "$(BUILD)/List Filter Images/"
 	mkdir -p $(BUILD)/src
 	cp src/maintenance.sh $(BUILD)/src/
 	cd $(BUILD) && zip -r -q ../$(NAME) .
@@ -92,10 +90,6 @@ link-live:
 	ln -sfn "$(CURDIR)/data" "$(WORKFLOW_DIR)/data"
 	ln -sfn "$(CURDIR)/icons" "$(WORKFLOW_DIR)/icons"
 	ln -sfn "$(CURDIR)/images" "$(WORKFLOW_DIR)/images"
-	mkdir -p "$(WORKFLOW_DIR)/List Filter Images"
-	for png in icon_summary icon_stats icon_levels icon_forecast icon_leeches; do \
-		ln -sfn "$(CURDIR)/icons/$$png.png" "$(WORKFLOW_DIR)/List Filter Images/$$png.png"; \
-	done
 	ln -sfn "$(CURDIR)/icon.png" "$(WORKFLOW_DIR)/icon.png"
 	for icon in *.png; do \
 		[ "$$icon" = "icon.png" ] || ln -sfn "$(CURDIR)/$$icon" "$(WORKFLOW_DIR)/$$icon"; \

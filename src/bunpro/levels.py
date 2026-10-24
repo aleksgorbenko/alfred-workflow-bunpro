@@ -1,11 +1,9 @@
 """Script Filter: BunPro JLPT progress (grammar + vocab per N-level)."""
 
-import os
-import sys
 from typing import Any
 
-from alfred_items import bold, emit, error_item, item
-from bunpro_api import BunproError, get_jlpt_progress
+from alfred_items import bold, item
+from bunpro_api import get_jlpt_progress
 
 DASHBOARD_URL = "https://bunpro.jp/dashboard"
 ICON = "icons/icon_levels.png"
@@ -43,26 +41,5 @@ def build_items(progress: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
-def main() -> None:
-    token = os.environ.get("BUNPRO_API_TOKEN", "").strip()
-    if not token:
-        emit(
-            [
-                error_item(
-                    "No BunPro API token set - add it in the workflow configuration"
-                )
-            ]
-        )
-        return
-
-    try:
-        progress = get_jlpt_progress(token)
-    except BunproError as error:
-        emit([error_item(str(error))])
-        return
-
-    emit(build_items(progress))
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+def load(token: str) -> list[dict[str, Any]]:
+    return build_items(get_jlpt_progress(token))

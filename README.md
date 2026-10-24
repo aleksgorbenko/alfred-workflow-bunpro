@@ -29,6 +29,12 @@ Search BunPro grammar points and review your personal progress from Alfred.
 | `bps` | Search BunPro grammar points by kana, romaji, or English. |
 | `bp` | Browse your dashboard summary, statistics, levels, forecast, and leeches. |
 
+- `bp <page>` opens a page: `summary`, `stats`, `levels`, `forecast`, `leeches`.
+- Text after the page filters its rows, e.g. `bp forecast tomorrow`.
+- Delete the page name to go back to the menu.
+- Pages load in the background: `Loading <page>…` shows until the data arrives, then cached pages open instantly.
+- First row on every page is the page itself: `Enter` opens the dashboard, `Tab` goes back.
+
 ![BunPro dashboard menu](images/about/main.png)
 
 ![BunPro grammar search](images/about/search.png)

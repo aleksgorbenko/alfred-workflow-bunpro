@@ -1,12 +1,10 @@
 """Script Filter: BunPro review forecast (grammar + vocab due per day)."""
 
 import datetime as dt
-import os
-import sys
 from typing import Any
 
-from alfred_items import emit, error_item, item
-from bunpro_api import BunproError, get_forecast_daily
+from alfred_items import item
+from bunpro_api import get_forecast_daily
 
 DASHBOARD_URL = "https://bunpro.jp/dashboard"
 ICON = "icons/icon_forecast.png"
@@ -40,26 +38,5 @@ def build_items(daily: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
-def main() -> None:
-    token = os.environ.get("BUNPRO_API_TOKEN", "").strip()
-    if not token:
-        emit(
-            [
-                error_item(
-                    "No BunPro API token set - add it in the workflow configuration"
-                )
-            ]
-        )
-        return
-
-    try:
-        daily = get_forecast_daily(token)
-    except BunproError as error:
-        emit([error_item(str(error))])
-        return
-
-    emit(build_items(daily))
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+def load(token: str) -> list[dict[str, Any]]:
+    return build_items(get_forecast_daily(token))

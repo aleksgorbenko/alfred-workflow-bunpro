@@ -1,11 +1,9 @@
 """Script Filter: BunPro summary (due counts, level, streak)."""
 
-import os
-import sys
 from typing import Any
 
-from alfred_items import emit, error_item, item
-from bunpro_api import BunproError, get_base_stats, get_due, get_user
+from alfred_items import item
+from bunpro_api import get_base_stats, get_due, get_user
 
 DASHBOARD_URL = "https://bunpro.jp/dashboard"
 ICON_LEVEL = "icons/icon_summary_level.png"
@@ -50,28 +48,5 @@ def build_items(
     ]
 
 
-def main() -> None:
-    token = os.environ.get("BUNPRO_API_TOKEN", "").strip()
-    if not token:
-        emit(
-            [
-                error_item(
-                    "No BunPro API token set - add it in the workflow configuration"
-                )
-            ]
-        )
-        return
-
-    try:
-        user = get_user(token)
-        due = get_due(token)
-        base_stats = get_base_stats(token)
-    except BunproError as error:
-        emit([error_item(str(error))])
-        return
-
-    emit(build_items(user, due, base_stats))
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+def load(token: str) -> list[dict[str, Any]]:
+    return build_items(get_user(token), get_due(token), get_base_stats(token))
