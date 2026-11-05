@@ -5,15 +5,15 @@ RUN := uv run --no-sync
 JSON_FILES := $(shell git ls-files '*.json')
 export HOMEBREW_NO_AUTO_UPDATE := 1
 
-.PHONY: setup icons test lint lint-shell lint-python lint-data lint-md lint-actions format format-check audit check ci clean build release sync-plist link-live
+.PHONY: setup icons test lint lint-shell lint-python lint-data lint-md lint-actions format format-check audit check ci clean build verify release sync-plist link-live
 
 setup:
-	brew bundle --quiet
 	uv sync --group dev
 
 icons:
 	icon-symbol.sh --batch tools/icons.txt --outdir icons --size 256 --fg "#FFFFFF" --style macos
-	icon-symbol.sh --batch tools/nodes.txt --outdir . --size 1024 --fg "#FFFFFF" --style macos
+	mkdir -p icons/nodes
+	icon-symbol.sh --batch tools/nodes.txt --outdir icons/nodes --size 1024 --fg "#FFFFFF" --style macos
 
 test:
 	$(RUN) pytest
@@ -59,18 +59,21 @@ build: check
 	mkdir -p $(BUILD)/data $(BUILD)/src/bunpro $(BUILD)/icons "$(BUILD)/images/about"
 	cp info.plist $(BUILD)/
 	cp icon.png $(BUILD)/
-	cp *.png $(BUILD)/
 	cp data/grammar.json $(BUILD)/data/
 	cp src/bunpro/*.py $(BUILD)/src/bunpro/
 	cp images/about/*.png "$(BUILD)/images/about/"
 	cp icons/*.png $(BUILD)/icons/
+	cp icons/nodes/*.png $(BUILD)/
 	mkdir -p $(BUILD)/src
 	cp src/maintenance.sh $(BUILD)/src/
 	cd $(BUILD) && zip -r -q ../$(NAME) .
 	rm -rf $(BUILD)
 	@echo "built $(DIST)/$(NAME)"
 
-release: build
+verify:
+	$(RUN) python tools/verify_bundle.py $(DIST)/$(NAME)
+
+release: build verify
 	@test -n "$(VERSION)" || (echo "usage: make release VERSION=v1.0.0" && exit 1)
 	git tag $(VERSION)
 	git push origin $(VERSION)
@@ -91,8 +94,6 @@ link-live:
 	ln -sfn "$(CURDIR)/icons" "$(WORKFLOW_DIR)/icons"
 	ln -sfn "$(CURDIR)/images" "$(WORKFLOW_DIR)/images"
 	ln -sfn "$(CURDIR)/icon.png" "$(WORKFLOW_DIR)/icon.png"
-	for icon in *.png; do \
-		[ "$$icon" = "icon.png" ] || ln -sfn "$(CURDIR)/$$icon" "$(WORKFLOW_DIR)/$$icon"; \
-	done
+	for png in icons/nodes/*.png; do ln -sfn "$(CURDIR)/$$png" "$(WORKFLOW_DIR)/$$(basename $$png)"; done
 	ln -sfn "$(CURDIR)/Makefile" "$(WORKFLOW_DIR)/Makefile"
 	@echo "linked $(WORKFLOW_DIR) to this repo"
