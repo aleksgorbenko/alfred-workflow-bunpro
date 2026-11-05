@@ -1,0 +1,3 @@
+# canvas node uid symbol background; rendered by make icons
+4FD3504E-7C4D-4670-A2D0-A77FC18B4B90 magnifyingglass #C74A4A
+B7DE4702-1C83-4BFB-B5D5-3F99B8E4FEA1 book.fill #C74A4A

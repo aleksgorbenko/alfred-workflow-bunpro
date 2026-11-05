@@ -1,0 +1,16 @@
+# name symbol background; rendered by make icons
+icon_summary list.bullet.clipboard.fill #C74A4A
+icon_stats chart.bar.fill #C74A4A
+icon_levels chart.bar.xaxis #C74A4A
+icon_forecast calendar #C74A4A
+icon_leeches ladybug.fill #C74A4A
+icon_stage_beginner leaf.fill #10252F
+icon_stage_adept tree.fill #1D3354
+icon_stage_seasoned star.fill #51396B
+icon_stage_expert flame.fill #cd5c5c
+icon_stage_master crown.fill #C74A4A
+icon_summary_level graduationcap.fill #C74A4A
+icon_summary_grammar_due books.vertical.fill #C74A4A
+icon_summary_vocab_due book.fill #C74A4A
+icon_summary_streak flame.fill #C74A4A
+maintenance_clear trash.fill #FF453A

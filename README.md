@@ -15,14 +15,14 @@
 </p>
 
 <p align="center">
-  <a href="#usage">Usage</a> ·
+  <a href="#commands">Commands</a> ·
   <a href="#install">Install</a> ·
   <a href="#development">Development</a>
 </p>
 
 Search BunPro grammar points and review your personal progress from Alfred.
 
-## Usage
+## Commands
 
 | Keyword | Function |
 | --- | --- |
@@ -33,7 +33,7 @@ Search BunPro grammar points and review your personal progress from Alfred.
 - Text after the page filters its rows, e.g. `bp forecast tomorrow`.
 - Delete the page name to go back to the menu.
 - Pages load in the background: `Loading <page>…` shows until the data arrives, then cached pages open instantly.
-- First row on every page is the page itself: `Enter` opens the dashboard, `Tab` goes back.
+- First row on every page is the page itself: `↩` opens the dashboard, `Tab` goes back.
 
 ![BunPro dashboard menu](images/about/main.png)
 
@@ -45,7 +45,7 @@ Open the Summary view to see your current BunPro progress.
 
 ### Maintenance
 
-- `:bp` - cache size (Enter reveals the folder) and Empty Cache.
+- `:bp` - cache size (`↩` reveals the folder) and Empty Cache.
 
 ## Install
 
